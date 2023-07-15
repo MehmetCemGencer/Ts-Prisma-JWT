@@ -22,7 +22,7 @@ model User {
 }
 
 model Profile {
-  user    User    @relation(fields: [id], references: [id])
+  user    User    @relation(fields: [id], references: [id], onDelete: Cascade)
   id      String  @unique
   fname   String?
   lname   String?

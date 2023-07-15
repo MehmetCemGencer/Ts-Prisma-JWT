@@ -8,14 +8,8 @@ export class App {
 	constructor(port: number, routes: expressRoute[]) {
 		this.app = express()
 		this.port = port
-		this.parseJson()
+		this.config()
 		this.registerRoutes(routes)
-	}
-
-	start() {
-		this.app.listen(this.port, () => {
-			console.log("Server listening on port ", this.port)
-		})
 	}
 
 	private registerRoutes(routes: expressRoute[]) {
@@ -24,7 +18,13 @@ export class App {
 		})
 	}
 
-	private parseJson() {
+	private config() {
 		this.app.use(express.json())
+	}
+
+	start() {
+		this.app.listen(this.port, () => {
+			console.log("Server listening on port ", this.port)
+		})
 	}
 }

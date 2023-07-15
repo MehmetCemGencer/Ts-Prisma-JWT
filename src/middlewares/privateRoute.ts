@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response } from "express"
 import JwtService from "../services/jwtservice.js"
 
-const jwt = new JwtService()
-export default function (req: Request, res: Response, next: NextFunction) {
-	const { decoded, error } = jwt.verify(req.headers.authorization)
+export class ProtectRoutes {
+	private jwt = new JwtService()
 
-	if (error) return res.status(401).json({ error })
+	privateRoute = (req: Request, res: Response, next: NextFunction) => {
+		const { decoded, error } = this.jwt.verify(req.headers.authorization)
 
-	return next()
+		if (error) return res.status(401).json({ error })
+
+		return next()
+	}
 }
