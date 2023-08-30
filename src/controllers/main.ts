@@ -67,6 +67,8 @@ export default class MainController {
 			where: { id: decoded["id"] },
 		})
 
+		if (!user) return res.status(400).json({ message: "User not found" })
+
 		delete user["password"]
 
 		return res.json({ user })
@@ -79,6 +81,8 @@ export default class MainController {
 		const user = await this.db.user.findUnique({
 			where: { id: decoded["id"] },
 		})
+
+		if (!user) return res.status(400).json({ message: "User not found" })
 
 		const { isMatch, error: e } = await this.encryption.check(
 			password,

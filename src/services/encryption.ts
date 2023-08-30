@@ -15,7 +15,7 @@ export default class EncryptionService {
 		try {
 			const isMatch = await bcrypt.compare(password, hash)
 
-			return { isMatch: true, error: null }
+			return { isMatch, error: null }
 		} catch (e) {
 			return { error: e, isMatch: false }
 		}
